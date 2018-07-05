@@ -17,20 +17,20 @@ public class AssuranceRespSociete extends AssuranceUser  {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AssuranceRespSociete(Long cin, Long registrationNumber, String name, String firstName,
+	public AssuranceRespSociete(Long cin, Long registrationNumber, String name,
 			Situation familySituation, String spouceName, String address, Date subscriptionDate, String email,
 			String cnamSector, String cnamAffiliation, String urlAffiliationFile, Date birthday, String password,
 			float salary, boolean active) {
-		super(cin, registrationNumber, name, firstName, familySituation, spouceName, address, subscriptionDate, email,
+		super(cin, registrationNumber, name, familySituation, spouceName, address, subscriptionDate, email,
 				cnamSector, cnamAffiliation, urlAffiliationFile, birthday, password, salary, active);
 		// TODO Auto-generated constructor stub
 	}
 
-	public AssuranceRespSociete(Long cin, Long registrationNumber, String name, String firstName,
+	public AssuranceRespSociete(Long cin, Long registrationNumber, String name,
 			Situation familySituation, String spouceName, String address, Date subscriptionDate, String email,
 			String cnamSector, String cnamAffiliation, String urlAffiliationFile, Date birthday, String password,
 			float salary, boolean active, Date date) {
-		super(cin, registrationNumber, name, firstName, familySituation, spouceName, address, subscriptionDate, email,
+		super(cin, registrationNumber, name,  familySituation, spouceName, address, subscriptionDate, email,
 				cnamSector, cnamAffiliation, urlAffiliationFile, birthday, password, salary, active);
 		this.date = date;
 	}

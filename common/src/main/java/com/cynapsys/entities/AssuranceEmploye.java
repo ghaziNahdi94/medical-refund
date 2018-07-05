@@ -32,16 +32,16 @@ public class AssuranceEmploye extends AssuranceUser{
 		this.date = date;
 	}
 
-	public AssuranceEmploye(Long cin, Long registrationNumber, String name, String firstName, Situation familySituation,
+	public AssuranceEmploye(Long cin, Long registrationNumber, String name, Situation familySituation,
 			String spouceName, String address, Date subscriptionDate, String email, String cnamSector,
 			String cnamAffiliation, String urlAffiliationFile, Date birthday, String password, float salary,
 			boolean active, Date date) {
-		super(cin, registrationNumber, name, firstName, familySituation, spouceName, address, subscriptionDate, email,
+		super(cin, registrationNumber, name, familySituation, spouceName, address, subscriptionDate, email,
 				cnamSector, cnamAffiliation, urlAffiliationFile, birthday, password, salary, active);
 		this.date = date;
 	}
-	public AssuranceEmploye(Long id, String f, String n) {
-		super(id,f,n);
+	public AssuranceEmploye(Long id, String n) {
+		super(id,n);
 	}
 	public AssuranceEmploye() {
 		// TODO Auto-generated constructor stub

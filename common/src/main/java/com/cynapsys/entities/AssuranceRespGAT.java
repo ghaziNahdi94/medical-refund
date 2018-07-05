@@ -15,11 +15,11 @@ public class AssuranceRespGAT extends AssuranceUser {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AssuranceRespGAT(Long cin, Long registrationNumber, String name, String firstName, Situation familySituation,
+	public AssuranceRespGAT(Long cin, Long registrationNumber, String name, Situation familySituation,
 			String spouceName, String address, Date subscriptionDate, String email, String cnamSector,
 			String cnamAffiliation, String urlAffiliationFile, Date birthday, String password, float salary,
 			boolean active) {
-		super(cin, registrationNumber, name, firstName, familySituation, spouceName, address, subscriptionDate, email,
+		super(cin, registrationNumber, name,  familySituation, spouceName, address, subscriptionDate, email,
 				cnamSector, cnamAffiliation, urlAffiliationFile, birthday, password, salary, active);
 		// TODO Auto-generated constructor stub
 	}

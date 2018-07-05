@@ -53,5 +53,10 @@ public void deleteAssuranceEmploye(@PathVariable Long id) {
 	aer.delete(a);
 }
 
+@GetMapping(value="chercher/{motcle}")
+public List<AssuranceEmploye> chercherAssuranceEmploye(@PathVariable String motcle) {
+	return aer.chercher(motcle);
+	
+}
 
 }
