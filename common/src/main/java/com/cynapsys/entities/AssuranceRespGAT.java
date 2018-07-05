@@ -14,7 +14,7 @@ public class AssuranceRespGAT extends AssuranceUser {
 	public AssuranceRespGAT() {
 		// TODO Auto-generated constructor stub
 	}
-
+//////Commentaire :p
 	public AssuranceRespGAT(Long cin, Long registrationNumber, String name, Situation familySituation,
 			String spouceName, String address, Date subscriptionDate, String email, String cnamSector,
 			String cnamAffiliation, String urlAffiliationFile, Date birthday, String password, float salary,
