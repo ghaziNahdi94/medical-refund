@@ -11,6 +11,6 @@ import com.cynapsys.entities.AssuranceEmploye;
 @Repository
 public interface AssuranceEmployeRepository extends JpaRepository<AssuranceEmploye, Long>{
 
-	
+	/**/
 	
 }
