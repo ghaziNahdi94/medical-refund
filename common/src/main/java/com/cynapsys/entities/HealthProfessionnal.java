@@ -22,6 +22,14 @@ public class HealthProfessionnal implements Serializable {
 	private Specialite specialite;
 	
 	
+	
+	
+	public Specialite getSpecialite() {
+		return specialite;
+	}
+	public void setSpecialite(Specialite specialite) {
+		this.specialite = specialite;
+	}
 	public Long getIdHealthProfessionnal() {
 		return idHealthProfessionnal;
 	}
