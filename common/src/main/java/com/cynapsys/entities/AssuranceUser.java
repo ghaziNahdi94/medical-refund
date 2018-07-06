@@ -24,10 +24,10 @@ public class AssuranceUser implements Serializable {
 	private Long cin;
 	private Long registrationNumber;
 	private String name;
-<<<<<<< HEAD
+
 	private String firstName;
-=======
->>>>>>> ff269941494f2cfaed75d82410247e73dbf3b8a2
+
+
 	@Enumerated(EnumType.STRING)
 	private Situation familySituation;
 	private String spouceName;
@@ -68,16 +68,16 @@ public class AssuranceUser implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-<<<<<<< HEAD
+
 	public String getFirstName() {
 		return firstName;
 	}
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-=======
+
 	
->>>>>>> ff269941494f2cfaed75d82410247e73dbf3b8a2
+
 	public Situation getFamilySituation() {
 		return familySituation;
 	}
@@ -145,26 +145,23 @@ public class AssuranceUser implements Serializable {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-<<<<<<< HEAD
+
 	public AssuranceUser( String name, String firstName) {
 		this.name = name;
 		this.firstName = firstName;
 	}
 	public AssuranceUser(Long cin, Long registrationNumber, String name, String firstName, Situation familySituation,
-=======
 
-	public AssuranceUser(Long cin, Long registrationNumber, String name, Situation familySituation,
->>>>>>> ff269941494f2cfaed75d82410247e73dbf3b8a2
+
+
 			String spouceName, String address, Date subscriptionDate, String email, String cnamSector,
 			String cnamAffiliation, String urlAffiliationFile, Date birthday, String password, float salary,
 			boolean active) {
 		this.cin = cin;
 		this.registrationNumber = registrationNumber;
 		this.name = name;
-<<<<<<< HEAD
+
 		this.firstName = firstName;
-=======
->>>>>>> ff269941494f2cfaed75d82410247e73dbf3b8a2
 		this.familySituation = familySituation;
 		this.spouceName = spouceName;
 		this.address = address;
@@ -179,11 +176,6 @@ public class AssuranceUser implements Serializable {
 	}
 	public AssuranceUser() {
 	}
-<<<<<<< HEAD
-=======
-	public AssuranceUser(Long id, String n) {
-	this.idAssuranceUser = id;
-	this.name=n;
-	}
->>>>>>> ff269941494f2cfaed75d82410247e73dbf3b8a2
+
+
 	}

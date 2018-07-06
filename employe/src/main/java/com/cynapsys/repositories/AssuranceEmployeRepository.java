@@ -17,17 +17,10 @@ import com.cynapsys.entities.AssuranceEmploye;
 public interface AssuranceEmployeRepository extends JpaRepository<AssuranceEmploye, Long>{
 
 	 @Query ("select a from AssuranceEmploye a where a.idAssuranceUser= :x")
-	 public AssuranceEmploye findOne(@Param("x") Long id);
-	 
+	 public	AssuranceEmploye findOne(@Param("x") Long id);
 	@Query("select c from AssuranceEmploye c where c.name like :x")
 	public List<AssuranceEmploye> chercher(@Param("x") String motcle);
-	
-	@Query ("select a from AssuranceEmploye a where a.idAssuranceUser= :x")
-	AssuranceEmploye findOne(@Param("x") Long id);
 
-
-	@Query("select c from AssuranceEmploye c where c.name like :x")
-	public List<AssuranceEmploye> chercher(@Param("x") String motcle);
 
 
 
