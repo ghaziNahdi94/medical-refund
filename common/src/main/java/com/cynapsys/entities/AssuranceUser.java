@@ -20,35 +20,68 @@ public class AssuranceUser implements Serializable {
 	
 	@Id
 	@GeneratedValue
-	private Long idAssuranceUser;
+	private Long id;
 	private Long cin;
-	private Long registrationNumber;
-	private String name;
+	private Long numMatricule;
+	private String nom;
 
-	private String firstName;
+	private String prenom;
 
 
 	@Enumerated(EnumType.STRING)
-	private Situation familySituation;
-	private String spouceName;
-	private String address;
-	//private Date subscriptionDate;
+	private Situation situationFamiliale;
+	private String nomConjoint;
+	private String adresse;
 	private String email;
-	private String cnamSector;
-	private String cnamAffiliation;
-	private String urlAffiliationFile;
-	private Date birthday;
+	@Enumerated(EnumType.STRING)
+	private Filiere filiereCnam;
+	private String numAffiliationCnam;
+	private String urlFichierAffiliation;
+	private Date dateNaissance;
 	private String password;
-	private float salary;
+	private float salaire;
 	private boolean active;
 	
-
 	
-	public Long getIdAssuranceUser() {
-		return idAssuranceUser;
+	public AssuranceUser() {}
+	
+	
+	
+	
+	
+	
+	public AssuranceUser(Long cin, Long numMatricule, String nom, String prenom, Situation situationFamiliale,
+			String nomConjoint, String adresse, String email, Filiere filiereCnam, String numAffiliationCnam,
+			String urlFichierAffiliation, Date dateNaissance, String password, float salaire, boolean active) {
+		super();
+		this.id = id;
+		this.cin = cin;
+		this.numMatricule = numMatricule;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.situationFamiliale = situationFamiliale;
+		this.nomConjoint = nomConjoint;
+		this.adresse = adresse;
+		this.email = email;
+		this.filiereCnam = filiereCnam;
+		this.numAffiliationCnam = numAffiliationCnam;
+		this.urlFichierAffiliation = urlFichierAffiliation;
+		this.dateNaissance = dateNaissance;
+		this.password = password;
+		this.salaire = salaire;
+		this.active = active;
 	}
-	public void setIdAssuranceUser(Long id) {
-		this.idAssuranceUser = id;
+
+
+
+
+
+
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public Long getCin() {
 		return cin;
@@ -56,76 +89,71 @@ public class AssuranceUser implements Serializable {
 	public void setCin(Long cin) {
 		this.cin = cin;
 	}
-	public Long getRegistrationNumber() {
-		return registrationNumber;
+	public Long getNumMatricule() {
+		return numMatricule;
 	}
-	public void setRegistrationNumber(Long registrationNumber) {
-		this.registrationNumber = registrationNumber;
+	public void setNumMatricule(Long numMatricule) {
+		this.numMatricule = numMatricule;
 	}
-	public String getName() {
-		return name;
+	public String getNom() {
+		return nom;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
-
-	public String getFirstName() {
-		return firstName;
+	public String getPrenom() {
+		return prenom;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
-
-	
-
-	public Situation getFamilySituation() {
-		return familySituation;
+	public Situation getSituationFamiliale() {
+		return situationFamiliale;
 	}
-	public void setFamilySituation(Situation familySituation) {
-		this.familySituation = familySituation;
+	public void setSituationFamiliale(Situation situationFamiliale) {
+		this.situationFamiliale = situationFamiliale;
 	}
-	public String getSpouceName() {
-		return spouceName;
+	public String getNomConjoint() {
+		return nomConjoint;
 	}
-	public void setSpouceName(String spouceName) {
-		this.spouceName = spouceName;
+	public void setNomConjoint(String nomConjoint) {
+		this.nomConjoint = nomConjoint;
 	}
-	public String getAddress() {
-		return address;
+	public String getAdresse() {
+		return adresse;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
 	}
-	
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getCnamSector() {
-		return cnamSector;
+	public Filiere getFiliereCnam() {
+		return filiereCnam;
 	}
-	public void setCnamSector(String cnamSector) {
-		this.cnamSector = cnamSector;
+	public void setFiliereCnam(Filiere filiereCnam) {
+		this.filiereCnam = filiereCnam;
 	}
-	public String getCnamAffiliation() {
-		return cnamAffiliation;
+	public String getNumAffiliationCnam() {
+		return numAffiliationCnam;
 	}
-	public void setCnamAffiliation(String cnamAffiliation) {
-		this.cnamAffiliation = cnamAffiliation;
+	public void setNumAffiliationCnam(String numAffiliationCnam) {
+		this.numAffiliationCnam = numAffiliationCnam;
 	}
-	public String getUrlAffiliationFile() {
-		return urlAffiliationFile;
+	public String getUrlFichierAffiliation() {
+		return urlFichierAffiliation;
 	}
-	public void setUrlAffiliationFile(String urlAffiliationFile) {
-		this.urlAffiliationFile = urlAffiliationFile;
+	public void setUrlFichierAffiliation(String urlFichierAffiliation) {
+		this.urlFichierAffiliation = urlFichierAffiliation;
 	}
-	public Date getBirthday() {
-		return birthday;
+	public Date getDateNaissance() {
+		return dateNaissance;
 	}
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
+	public void setDateNaissance(Date dateNaissance) {
+		this.dateNaissance = dateNaissance;
 	}
 	public String getPassword() {
 		return password;
@@ -133,11 +161,11 @@ public class AssuranceUser implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public float getSalary() {
-		return salary;
+	public float getSalaire() {
+		return salaire;
 	}
-	public void setSalary(float salary) {
-		this.salary = salary;
+	public void setSalaire(float salaire) {
+		this.salaire = salaire;
 	}
 	public boolean isActive() {
 		return active;
@@ -145,37 +173,10 @@ public class AssuranceUser implements Serializable {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	
 
-	public AssuranceUser( String name, String firstName) {
-		this.name = name;
-		this.firstName = firstName;
-	}
-	public AssuranceUser(Long cin, Long registrationNumber, String name, String firstName, Situation familySituation,
-
-
-
-			String spouceName, String address, Date subscriptionDate, String email, String cnamSector,
-			String cnamAffiliation, String urlAffiliationFile, Date birthday, String password, float salary,
-			boolean active) {
-		this.cin = cin;
-		this.registrationNumber = registrationNumber;
-		this.name = name;
-
-		this.firstName = firstName;
-		this.familySituation = familySituation;
-		this.spouceName = spouceName;
-		this.address = address;
-		this.email = email;
-		this.cnamSector = cnamSector;
-		this.cnamAffiliation = cnamAffiliation;
-		this.urlAffiliationFile = urlAffiliationFile;
-		this.birthday = birthday;
-		this.password = password;
-		this.salary = salary;
-		this.active = active;
-	}
-	public AssuranceUser() {
-	}
-
+	
+	
+	
 
 	}
