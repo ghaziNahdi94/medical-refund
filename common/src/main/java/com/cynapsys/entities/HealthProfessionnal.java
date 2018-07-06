@@ -22,6 +22,7 @@ public class HealthProfessionnal implements Serializable {
 	private Specialite specialite;
 	
 	
+<<<<<<< HEAD
 	
 	
 	public Specialite getSpecialite() {
@@ -30,6 +31,8 @@ public class HealthProfessionnal implements Serializable {
 	public void setSpecialite(Specialite specialite) {
 		this.specialite = specialite;
 	}
+=======
+>>>>>>> ff269941494f2cfaed75d82410247e73dbf3b8a2
 	public Long getIdHealthProfessionnal() {
 		return idHealthProfessionnal;
 	}

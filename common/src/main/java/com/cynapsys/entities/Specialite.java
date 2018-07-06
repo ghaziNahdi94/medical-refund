@@ -1,11 +1,15 @@
 package com.cynapsys.entities;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.core.sym.Name;
 
 public enum Specialite {
 	
+=======
+public enum Specialite {
+>>>>>>> ff269941494f2cfaed75d82410247e73dbf3b8a2
 	Angiologue,
 	Cardiologue,
 	Cancérologue,
@@ -20,6 +24,7 @@ public enum Specialite {
 	Pneumologue,
 	Pharmacien,
 	Rhumatologue,
+<<<<<<< HEAD
 	Urologue;
 
 	
@@ -80,4 +85,7 @@ public enum Specialite {
 	
 	
 	
+=======
+	Urologue
+>>>>>>> ff269941494f2cfaed75d82410247e73dbf3b8a2
 }

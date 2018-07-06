@@ -32,6 +32,7 @@ public class AssuranceEmploye extends AssuranceUser{
 		this.date = date;
 	}
 
+<<<<<<< HEAD
 	public AssuranceEmploye(Long cin, Long registrationNumber, String name, String firstName, Situation familySituation,
 			String spouceName, String address, Date subscriptionDate, String email, String cnamSector,
 			String cnamAffiliation, String urlAffiliationFile, Date birthday, String password, float salary,
@@ -41,6 +42,19 @@ public class AssuranceEmploye extends AssuranceUser{
 		this.date = date;
 	}
 
+=======
+	public AssuranceEmploye(Long cin, Long registrationNumber, String name, Situation familySituation,
+			String spouceName, String address, Date subscriptionDate, String email, String cnamSector,
+			String cnamAffiliation, String urlAffiliationFile, Date birthday, String password, float salary,
+			boolean active, Date date) {
+		super(cin, registrationNumber, name, familySituation, spouceName, address, subscriptionDate, email,
+				cnamSector, cnamAffiliation, urlAffiliationFile, birthday, password, salary, active);
+		this.date = date;
+	}
+	public AssuranceEmploye(Long id, String n) {
+		super(id,n);
+	}
+>>>>>>> ff269941494f2cfaed75d82410247e73dbf3b8a2
 	public AssuranceEmploye() {
 		// TODO Auto-generated constructor stub
 	}
