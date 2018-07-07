@@ -88,7 +88,7 @@ public class BulletinSoinController {
 	
 	
 	
-	@GetMapping("/uploadBulletinFile/{name}")
+	@GetMapping("/downloadBulletinFile/{name}")
 	public ResponseEntity<InputStreamResource> download(@PathVariable String name) throws IOException {
 
 
