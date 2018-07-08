@@ -4,12 +4,17 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Cascade;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 public class BulletinSoin implements Serializable{
 	
@@ -24,7 +29,8 @@ public class BulletinSoin implements Serializable{
 	private Date dateAffiliation;
 	private boolean active;
 	
-	@OneToMany(mappedBy="bulletinSoins")
+    @JsonManagedReference
+	@OneToMany(cascade= {CascadeType.ALL}, mappedBy="bulletinSoin")
 	private List<ArticleMedical> articleMedicals;
 	
 	@ManyToOne

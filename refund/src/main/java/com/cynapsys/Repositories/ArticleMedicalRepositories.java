@@ -1,19 +1,15 @@
 package com.cynapsys.Repositories;
 
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cynapsys.entities.BulletinSoin;
+import com.cynapsys.entities.ArticleMedical;
 
-@Repository
 @Transactional
-public interface BulletinSoinRepository extends JpaRepository<BulletinSoin, Long>{
+@Repository
+public interface ArticleMedicalRepositories extends JpaRepository<ArticleMedical, Long> {
 
 	
-
 	
 }
