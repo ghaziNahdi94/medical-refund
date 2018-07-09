@@ -35,7 +35,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cynapsys.Repositories.ArticleMedicalRepositories;
 import com.cynapsys.Repositories.BulletinSoinRepository;
 import com.cynapsys.entities.ArticleMedical;
 import com.cynapsys.entities.BulletinSoin;
@@ -56,23 +55,12 @@ public class BulletinSoinController {
 	
 	@Autowired
 	private BulletinSoinRepository bsr;
-	@Autowired
-	private ArticleMedicalRepositories amr;
 	
 	
 	
 	
-	@DeleteMapping("/delete/article/{id}")
-	public String deleteArticle(@PathVariable Long id) {
-		
-		ArticleMedical am = amr.getOne(id);
-		
-		am.setActive(false);
-		
-		amr.save(am);
-		
-		return "ok";
-	}
+	
+	
 	
 	
 	@DeleteMapping("/delete/{id}")
