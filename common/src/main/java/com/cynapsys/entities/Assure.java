@@ -26,7 +26,7 @@ public class Assure extends AssuranceUser{
 	private int nbrPersonneEnCharge;
 	private String nationnalite;
 
-	@OneToMany(mappedBy="assures")
+	@OneToMany(mappedBy="assure")
 	private List<BulletinSoin> bulletinSoins;
 
 	

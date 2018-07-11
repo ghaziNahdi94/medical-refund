@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -82,7 +83,7 @@ public class BulletinSoinController {
 	@GetMapping("/all")
 	public List<BulletinSoin> getAll(){
 		
-		return bsr.findAll().stream().filter( bs -> bs.isActive() == true).collect(Collectors.toList());
+		return ((Collection<BulletinSoin>) bsr.findAll()).stream().filter( bs -> bs.isActive() == true).collect(Collectors.toList());
 		
 	}
 	

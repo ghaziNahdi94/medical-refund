@@ -29,9 +29,16 @@ public List<Assure> getAll() {
 	return ar.findAll();
 }
 
+@GetMapping(value="/getByCIN/{cin}")
+public Assure getAssureByCIN(@PathVariable Long cin) {
+	
+	return ar.getByCin(cin);
+}
+
 @GetMapping(value="/get/{id}")
 public Assure getAssuranceEmploye(@PathVariable Long id) {
-	return ar.findOne(id);
+	
+	return  ar.getById(id);
 }
 
 @PostMapping(value="/create")
@@ -41,7 +48,7 @@ public void createAssuranceEmploye(@RequestBody Assure a) {
 
 @PutMapping(value="/update/{id}")
 public void updateAssuranceEmploye(@RequestBody Assure ae, @PathVariable Long id) {
-	Assure a = ar.findOne(id);
+	Assure a = ar.getById(id);
 	if (a!= null)
 		{
 		ae.setId(id);
@@ -51,14 +58,10 @@ public void updateAssuranceEmploye(@RequestBody Assure ae, @PathVariable Long id
 
 @DeleteMapping(value="/delete/{id}")
 public void deleteAssuranceEmploye(@PathVariable Long id) {
-	Assure a = ar.findOne(id);
+	Assure a = ar.findById(id).orElse(null);
 	ar.delete(a);
 }
 
-@GetMapping(value="chercher/{motcle}")
-public List<Assure> chercherAssuranceEmploye(@PathVariable String motcle) {
-	return ar.chercher(motcle);
-	
-}
+
 
 }

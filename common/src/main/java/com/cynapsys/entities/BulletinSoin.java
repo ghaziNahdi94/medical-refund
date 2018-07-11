@@ -39,7 +39,7 @@ public class BulletinSoin implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="idAssure")
-	private Assure assures;
+	private Assure assure;
 	
 	
 	public BulletinSoin() {
@@ -61,7 +61,7 @@ public class BulletinSoin implements Serializable{
 		this.active = active;
 		this.articleMedicals = articleMedicals;
 		this.bordereaux = bordereaux;
-		this.assures = assures;
+		this.assure = assures;
 	}
 
 
@@ -165,13 +165,13 @@ public class BulletinSoin implements Serializable{
 	}
 
 
-	public Assure getAssures() {
-		return assures;
+	public Assure getAssure() {
+		return assure;
 	}
 
 
-	public void setAssures(Assure assures) {
-		this.assures = assures;
+	public void setAssures(Assure assure) {
+		this.assure = assure;
 	}
 
 
