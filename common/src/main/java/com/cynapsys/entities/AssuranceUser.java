@@ -13,6 +13,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @MappedSuperclass
@@ -37,6 +39,7 @@ public class AssuranceUser implements Serializable {
 	private Filiere filiereCnam;
 	private String numAffiliationCnam;
 	private String urlFichierAffiliation;
+	@Temporal(value = TemporalType.DATE)
 	private Date dateNaissance;
 	private String password;
 	private float salaire;

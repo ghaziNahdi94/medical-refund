@@ -12,10 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 @Entity
 public class Assure extends AssuranceUser{
 	
-	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateAffiliation;
 	
 	@Enumerated(EnumType.STRING)
