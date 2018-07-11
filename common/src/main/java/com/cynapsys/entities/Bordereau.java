@@ -13,46 +13,79 @@ public class Bordereau implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private Long idBordereau;
+	private Long id;
 	private String code;
-	private String state;
-	private Date date;
+	private String etat;
+	private Date dateEnvoi;
 	@OneToMany(mappedBy="bordereaux")
-	private List<CareBulletin> careBulletin;
+	private List<BulletinSoin> bulletinSoin;
 	
-	public Long getIdBordereau() {
-		return idBordereau;
-	}
-	public void setIdBordereau(Long id) {
-		this.idBordereau = id;
-	}
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	public Bordereau(String code, String state, Date date) {
-		super();
-		this.code = code;
-		this.state = state;
-		this.date = date;
-	}
+	
 	public Bordereau() {
 		// TODO Auto-generated constructor stub
 	}
+
+
+	public Bordereau(String code, String etat, Date dateEnvoi, List<BulletinSoin> bulletinSoin) {
+		
+		this.code = code;
+		this.etat = etat;
+		this.dateEnvoi = dateEnvoi;
+		this.bulletinSoin = bulletinSoin;
+	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public String getCode() {
+		return code;
+	}
+
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+
+	public String getEtat() {
+		return etat;
+	}
+
+
+	public void setEtat(String etat) {
+		this.etat = etat;
+	}
+
+
+	public Date getDateEnvoi() {
+		return dateEnvoi;
+	}
+
+
+	public void setDateEnvoi(Date dateEnvoi) {
+		this.dateEnvoi = dateEnvoi;
+	}
+
+
+	public List<BulletinSoin> getBulletinSoin() {
+		return bulletinSoin;
+	}
+
+
+	public void setBulletinSoin(List<BulletinSoin> bulletinSoin) {
+		this.bulletinSoin = bulletinSoin;
+	}
+	
+	
+	
 	
 	
 }

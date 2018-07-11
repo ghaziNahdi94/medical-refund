@@ -12,51 +12,52 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.cynapsys.entities.AssuranceEmploye;
+import com.cynapsys.entities.Assure;
 import com.cynapsys.entities.AssuranceUser;
-import com.cynapsys.repositories.AssuranceEmployeRepository;
+import com.cynapsys.repositories.AssureRepository;
 
 @RestController
 @RequestMapping(value="/employe")
 @CrossOrigin("*")
-public class AssuranceEmployeController {
+public class AssureController {
 
 	@Autowired
-	private AssuranceEmployeRepository aer;
+	private AssureRepository ar;
 	
 @GetMapping(value="/all")
-public List<AssuranceEmploye> getAll() {
-	return aer.findAll();
+public List<Assure> getAll() {
+	return ar.findAll();
 }
 
 @GetMapping(value="/get/{id}")
-public AssuranceEmploye getAssuranceEmploye(@PathVariable Long id) {
-	return aer.findOne(id);
+public Assure getAssuranceEmploye(@PathVariable Long id) {
+	return ar.findOne(id);
 }
 
 @PostMapping(value="/create")
-public void createAssuranceEmploye(@RequestBody AssuranceEmploye a) {
-	aer.save(a);
+public void createAssuranceEmploye(@RequestBody Assure a) {
+	ar.save(a);
 }
 
 @PutMapping(value="/update/{id}")
-public void updateAssuranceEmploye(@RequestBody AssuranceEmploye ae, @PathVariable Long id) {
-	AssuranceEmploye a = aer.findOne(id);
+public void updateAssuranceEmploye(@RequestBody Assure ae, @PathVariable Long id) {
+	Assure a = ar.findOne(id);
 	if (a!= null)
-		{ae.setIdAssuranceUser(id);
-		aer.save(ae);
+		{
+		ae.setId(id);
+		ar.save(ae);
 		}
 }
 
 @DeleteMapping(value="/delete/{id}")
 public void deleteAssuranceEmploye(@PathVariable Long id) {
-	AssuranceEmploye a = aer.findOne(id);
-	aer.delete(a);
+	Assure a = ar.findOne(id);
+	ar.delete(a);
 }
 
 @GetMapping(value="chercher/{motcle}")
-public List<AssuranceEmploye> chercherAssuranceEmploye(@PathVariable String motcle) {
-	return aer.chercher(motcle);
+public List<Assure> chercherAssuranceEmploye(@PathVariable String motcle) {
+	return ar.chercher(motcle);
 	
 }
 
