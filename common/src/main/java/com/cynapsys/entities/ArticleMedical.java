@@ -3,12 +3,16 @@ package com.cynapsys.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class ArticleMedical implements Serializable {
 	@Id
@@ -16,13 +20,19 @@ public class ArticleMedical implements Serializable {
 	private Long id;
 	private String urlFichier;
 	private String libelle;
+	
+	@Lob
+	@Column(length=800)
 	private String description;
+	
 	private float prix;
 	private int quantite;
+	private boolean active;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="idBulletinSoin")
-	private BulletinSoin bulletinSoins;
+	private BulletinSoin bulletinSoin;
 	
 
 	public ArticleMedical() {
@@ -30,15 +40,18 @@ public class ArticleMedical implements Serializable {
 	}
 
 
-	public ArticleMedical(String urlFichier, String libelle, String description, float prix, int quantite,
-			BulletinSoin bulletinSoins) {
+	public ArticleMedical(Long id, String urlFichier, String libelle, String description, float prix, int quantite,
+			BulletinSoin bulletinSoin, boolean active) {
 		
+		this.id = id;
 		this.urlFichier = urlFichier;
 		this.libelle = libelle;
 		this.description = description;
 		this.prix = prix;
 		this.quantite = quantite;
-		this.bulletinSoins = bulletinSoins;
+		this.bulletinSoin = bulletinSoin;
+		this.active = active;
+		
 	}
 
 
@@ -92,13 +105,33 @@ public class ArticleMedical implements Serializable {
 	}
 
 
-	public BulletinSoin getBulletinSoins() {
-		return bulletinSoins;
+	public BulletinSoin getBulletinSoin() {
+		return bulletinSoin;
 	}
 
 
-	public void setBulletinSoins(BulletinSoin bulletinSoins) {
-		this.bulletinSoins = bulletinSoins;
+	public void setBulletinSoin(BulletinSoin bulletinSoin) {
+		this.bulletinSoin = bulletinSoin;
+	}
+
+
+	public boolean isActive() {
+		return active;
+	}
+
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	
