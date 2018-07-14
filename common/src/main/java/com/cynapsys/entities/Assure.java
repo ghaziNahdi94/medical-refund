@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 public class Assure extends AssuranceUser{
 	
@@ -26,6 +28,7 @@ public class Assure extends AssuranceUser{
 	private int nbrPersonneEnCharge;
 	private String nationnalite;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy="assure")
 	private List<BulletinSoin> bulletinSoins;
 
@@ -69,48 +72,146 @@ public class Assure extends AssuranceUser{
 
 
 
+	public Date getDateAffiliation() {
+		return dateAffiliation;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public void setDateAffiliation(Date dateAffiliation) {
+		this.dateAffiliation = dateAffiliation;
+	}
+
+
+
+
+
+
+
+
+
+
+
 	public Role getRole() {
 		return role;
 	}
+
+
+
+
+
+
+
+
+
+
 
 	public void setRole(Role role) {
 		this.role = role;
 	}
 
 
-	public List<BulletinSoin> getCareBulletins() {
-		return bulletinSoins;
-	}
 
-	public void setCareBulletins(List<BulletinSoin> bulletinSoins) {
-		this.bulletinSoins = bulletinSoins;
-	}
 
-	public Date getDateAffiliation() {
-		return dateAffiliation;
-	}
 
-	public void setDateAffiliation(Date dateAffiliation) {
-		this.dateAffiliation = dateAffiliation;
-	}
+
+
+
+
+
 
 	public int getNbrPersonneEnCharge() {
 		return nbrPersonneEnCharge;
 	}
 
+
+
+
+
+
+
+
+
+
+
 	public void setNbrPersonneEnCharge(int nbrPersonneEnCharge) {
 		this.nbrPersonneEnCharge = nbrPersonneEnCharge;
 	}
+
+
+
+
+
+
+
+
+
+
 
 	public String getNationnalite() {
 		return nationnalite;
 	}
 
+
+
+
+
+
+
+
+
+
+
 	public void setNationnalite(String nationnalite) {
 		this.nationnalite = nationnalite;
 	}
 
-	
+
+
+
+
+
+
+
+
+
+
+	public List<BulletinSoin> getBulletinSoins() {
+		return bulletinSoins;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public void setBulletinSoins(List<BulletinSoin> bulletinSoins) {
+		this.bulletinSoins = bulletinSoins;
+	}
+
+
+
+
+
+
+
+
+
+
+
 	
 	
 	

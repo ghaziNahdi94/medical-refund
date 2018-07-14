@@ -11,18 +11,25 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -106,6 +113,7 @@ public class BulletinSoinController {
 		
 		Date date = new Date();
 		
+		
 		bulletin.setDateAffiliation(date);
 		
 		bsr.save(bulletin);
@@ -116,24 +124,24 @@ public class BulletinSoinController {
 	
 	
 	@PostMapping("/uploadArticlesFile")
-	public String uploadArticlesFile(@RequestParam("files") MultipartFile[] files) {
+	public List<String> uploadArticlesFile(@RequestParam("files") MultipartFile[] files) {
 	
+		ArrayList<String> names = new ArrayList<String>();
+		
 		try {
-			saveUploadedFiles(Arrays.asList(files), UPLOADED_FOLDER_ARTICLES);
+			names = (ArrayList<String>) saveUploadedFiles(Arrays.asList(files), UPLOADED_FOLDER_ARTICLES);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return "ok";
+		return names;
 	}
 	
 	
 	@PostMapping("/uploadBulletinFile")
 	public String uploadBulletinFile(@RequestParam("file") MultipartFile file) {
-		
-		logger.debug("single file !");
-		
+	
+		String fileName = "";
 		
 		if(file.isEmpty()) {
 			logger.debug("empty !");
@@ -142,7 +150,7 @@ public class BulletinSoinController {
 		
 		
 		try {
-			saveUploadedFiles(Arrays.asList(file), UPLOADED_FOLDER_BULLETIN);
+			fileName = saveUploadedFile(file, UPLOADED_FOLDER_BULLETIN);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -150,7 +158,7 @@ public class BulletinSoinController {
 		
 		
 		
-		return file.getOriginalFilename();
+		return fileName;
 	}
 	
 	
@@ -158,16 +166,27 @@ public class BulletinSoinController {
 	@GetMapping("/downloadArticleFile/{name}")
 	public ResponseEntity<InputStreamResource> downloadArticle(@PathVariable String name) throws IOException {
 
-
 		File file = new File(UPLOADED_FOLDER_ARTICLES+name);
 
 	    InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
-	    return ResponseEntity.ok()
-	            .contentLength(file.length())
-	            .contentType(MediaType.parseMediaType("application/octet-stream"))
-	            .body(resource);
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.parseMediaType("application/pdf"));
+	    headers.add("Content-Disposition", "filename=" + name);
+	    headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+	    headers.add("Pragma", "no-cache");
+	    headers.add("Expires", "0");
+	    headers.setContentLength(file.length());
+	    ResponseEntity<InputStreamResource> response = new ResponseEntity<InputStreamResource>(
+	      new InputStreamResource(new FileInputStream(file)), headers, HttpStatus.OK);
+	    return response;
+	    
+	    
 	}
+	
+	
+	
+	
 	
 	@GetMapping("/downloadBulletinFile/{name}")
 	public ResponseEntity<InputStreamResource> downloadBulletin(@PathVariable String name) throws IOException {
@@ -177,10 +196,16 @@ public class BulletinSoinController {
 
 	    InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
-	    return ResponseEntity.ok()
-	            .contentLength(file.length())
-	            .contentType(MediaType.parseMediaType("application/octet-stream"))
-	            .body(resource);
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.parseMediaType("application/pdf"));
+	    headers.add("Content-Disposition", "filename=" + name);
+	    headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+	    headers.add("Pragma", "no-cache");
+	    headers.add("Expires", "0");
+	    headers.setContentLength(file.length());
+	    ResponseEntity<InputStreamResource> response = new ResponseEntity<InputStreamResource>(
+	      new InputStreamResource(new FileInputStream(file)), headers, HttpStatus.OK);
+	    return response;
 	}
 	
 	
@@ -194,25 +219,47 @@ public class BulletinSoinController {
 	
 	
 	
-	//--------------------save file
-    private void saveUploadedFiles(List<MultipartFile> files, String directory) throws IOException {
+	//------------------------------------Save files
+    private List<String> saveUploadedFiles(List<MultipartFile> files, String directory) throws IOException {
 
+    	ArrayList<String> names = new ArrayList<>();
+    	
         for (MultipartFile file : files) {
 
+           String fileName = saveUploadedFile(file, UPLOADED_FOLDER_ARTICLES);
+           
+           names.add(fileName);
+
+        }
+        
+        return names;
+    }
+    private String saveUploadedFile(MultipartFile file, String directory) throws IOException {
+
+    		String fileName = RandomStringUtils.randomAlphanumeric(30) + ".pdf";
+    	
+    		File directoryFile = new File(directory);
+    	
+    		String[] files = directoryFile.list();
+    	
+    	
+    		while(Arrays.asList(files).contains(fileName)) {
+    			fileName = RandomStringUtils.randomAlphanumeric(30) + ".pdf";
+    		}
+    		
+    	
             if (file.isEmpty()) {
-                continue; //next pls
+                return "";
             }
 
             byte[] bytes = file.getBytes();
-            Path path = Paths.get(directory + file.getOriginalFilename());
+            Path path = Paths.get(directory + fileName);
             Files.write(path, bytes);
 
-        }
+        
+            return fileName;
     }
     
-    
-    
-   
     
     
     

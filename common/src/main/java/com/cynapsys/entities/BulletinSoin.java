@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Cascade;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 public class BulletinSoin implements Serializable{
@@ -21,14 +22,17 @@ public class BulletinSoin implements Serializable{
 	@Id
 	@GeneratedValue
 	private Long id;
+	private Long numBulletin;
 	private String urlBulletin;
 	private float montantRembourse;
+	private float montantPharmacie;
 	private String etat;
 	private String resultat;
 	private Date dateValidation;
 	private Date dateAffiliation;
+	private Date dateSoin;
 	private boolean active;
-	//
+	
     @JsonManagedReference
 	@OneToMany(cascade= {CascadeType.ALL}, mappedBy="bulletinSoin")
 	private List<ArticleMedical> articleMedicals;
@@ -37,6 +41,8 @@ public class BulletinSoin implements Serializable{
 	@JoinColumn(name="idBordereau")
 	private Bordereau bordereaux;
 	
+	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="idAssure")
 	private Assure assure;
@@ -47,21 +53,24 @@ public class BulletinSoin implements Serializable{
 	}
 
 
-	public BulletinSoin(String urlBulletin, float montantRembourse, String etat, String resultat,
-			Date dateValidation, Date dateAffiliation, boolean active, List<ArticleMedical> articleMedicals,
-			Bordereau bordereaux, Assure assures) {
+	public BulletinSoin(Long id, Long numBulletin, String urlBulletin, float montantRembourse, float montantPharmacie,
+			String etat, String resultat, Date dateValidation, Date dateAffiliation, Date dateSoin, boolean active,
+			List<ArticleMedical> articleMedicals, Bordereau bordereaux, Assure assure) {
 		super();
-	
+		this.id = id;
+		this.numBulletin = numBulletin;
 		this.urlBulletin = urlBulletin;
 		this.montantRembourse = montantRembourse;
+		this.montantPharmacie = montantPharmacie;
 		this.etat = etat;
 		this.resultat = resultat;
 		this.dateValidation = dateValidation;
 		this.dateAffiliation = dateAffiliation;
+		this.dateSoin = dateSoin;
 		this.active = active;
 		this.articleMedicals = articleMedicals;
 		this.bordereaux = bordereaux;
-		this.assure = assures;
+		this.assure = assure;
 	}
 
 
@@ -72,6 +81,16 @@ public class BulletinSoin implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+
+	public Long getNumBulletin() {
+		return numBulletin;
+	}
+
+
+	public void setNumBulletin(Long numBulletin) {
+		this.numBulletin = numBulletin;
 	}
 
 
@@ -92,6 +111,16 @@ public class BulletinSoin implements Serializable{
 
 	public void setMontantRembourse(float montantRembourse) {
 		this.montantRembourse = montantRembourse;
+	}
+
+
+	public float getMontantPharmacie() {
+		return montantPharmacie;
+	}
+
+
+	public void setMontantPharmacie(float montantPharmacie) {
+		this.montantPharmacie = montantPharmacie;
 	}
 
 
@@ -135,6 +164,16 @@ public class BulletinSoin implements Serializable{
 	}
 
 
+	public Date getDateSoin() {
+		return dateSoin;
+	}
+
+
+	public void setDateSoin(Date dateSoin) {
+		this.dateSoin = dateSoin;
+	}
+
+
 	public boolean isActive() {
 		return active;
 	}
@@ -170,11 +209,18 @@ public class BulletinSoin implements Serializable{
 	}
 
 
-	public void setAssures(Assure assure) {
+	public void setAssure(Assure assure) {
 		this.assure = assure;
 	}
 
 
+	
+
+
+
+
+
+	
 
 	
 	

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.cynapsys.entities.Assure;
+import com.cynapsys.entities.BulletinSoin;
 import com.cynapsys.entities.AssuranceUser;
 import com.cynapsys.repositories.AssureRepository;
 
@@ -60,6 +61,29 @@ public void updateAssuranceEmploye(@RequestBody Assure ae, @PathVariable Long id
 public void deleteAssuranceEmploye(@PathVariable Long id) {
 	Assure a = ar.findById(id).orElse(null);
 	ar.delete(a);
+}
+
+
+@GetMapping(value="/bulletin/{id}")
+public Assure getAsureByBulletinId(@PathVariable Long id) {
+	
+	Assure as = null;
+	
+	List<Assure> list = ar.findAll();
+	
+	for(Assure a : list) {
+		
+		for(BulletinSoin b : a.getBulletinSoins()) {
+			System.out.println(b.getId()+"/"+id);
+			System.out.println(b.getId().equals(id));
+			if(b.getId().equals(id))
+				as = a;
+			
+		}
+		
+	}
+	
+	return as;
 }
 
 
