@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cynapsys.entities.Admin;
 import com.cynapsys.entities.Assure;
 
 
@@ -17,13 +18,11 @@ import com.cynapsys.entities.Assure;
 @Repository
 public interface AssureRepository extends CrudRepository<Assure, Long>{
 
-	
-	public Assure getByCin(Long cin);
+	public List<Assure> findByCin(Long cin);
 	public List<Assure> findAll();
+	public Assure getByCin(Long cin);
 	public Assure getById(Long id);
 
 
-
-	
 	
 }

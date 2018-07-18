@@ -10,35 +10,33 @@ import javax.persistence.ManyToOne;
 public class Admin extends AssuranceUser {
 	
 
-	private Date dateAffiliation;
+	private Date dateDerniereModif;
 
 
 	public Admin() {}
 
-
 	
 
 
-	public Admin(Long cin, Long numMatricule, String nom, String prenom, Situation situationFamiliale,
-			String nomConjoint, String adresse, String email, Filiere filiereCnam, String numAffiliationCnam,
-			String urlFichierAffiliation, Date dateNaissance, String password, float salaire, boolean active,
-			Date dateAffiliation) {
-		super(cin, numMatricule, nom, prenom, situationFamiliale, nomConjoint, adresse, email, filiereCnam,
-				numAffiliationCnam, urlFichierAffiliation, dateNaissance, password, salaire, active);
-		this.dateAffiliation = dateAffiliation;
+
+	public Admin(Long cin, Date dateCin, Long numMatricule, String nom, Sexe sexe, String prenom, String adresse,
+			String email, Date dateInscription, Date dateNaissance, String password, boolean active,
+			Date dateDerniereModif) {
+		super(cin, dateCin, numMatricule, nom, sexe, prenom, adresse, email, dateInscription, dateNaissance, password,
+				active);
+		this.dateDerniereModif = dateDerniereModif;
 	}
 
 
 
 
 
-	public Date getDateAffiliation() {
-		return dateAffiliation;
+	public Date getDateDerniereModif() {
+		return dateDerniereModif;
 	}
 
-
-	public void setDateAffiliation(Date dateAffiliation) {
-		this.dateAffiliation = dateAffiliation;
+	public void setDateDerniereModif(Date date) {
+		this.dateDerniereModif = date;
 	}
 	
 	

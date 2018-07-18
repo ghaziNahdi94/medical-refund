@@ -1,6 +1,7 @@
 package com.cynapsys.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,25 +14,24 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.cynapsys.entities.Assure;
+
 import com.cynapsys.entities.Admin;
-import com.cynapsys.entities.BulletinSoin;
-import com.cynapsys.entities.AssuranceUser;
+import com.cynapsys.entities.Assure;
+import com.cynapsys.entities.User;
 import com.cynapsys.repositories.AdminRepository;
-import com.cynapsys.repositories.AssureRepository;
 
 @RestController
-@RequestMapping(value="/assure")
+@RequestMapping(value="/admin")
 @CrossOrigin("*")
-public class AssureController {
+public class AdminController {
 
 	@Autowired
-	private AssureRepository ar;
-	private List<Assure> laf;
+	private AdminRepository ar;
+	private List<Admin> laf;
 @GetMapping(value="/all")
-public List<Assure> getAll() {
-	List<Assure> la = ar.findAll();
-	List<Assure> laf = new ArrayList<Assure>();
+public List<Admin> getAll() {
+	List<Admin> la = ar.findAll();
+	List<Admin> laf = new ArrayList<Admin>();
 		 if (la.size() != 0) {
 			for(int i=0; i<la.size(); i++) {
 				if (la.get(i).isActive())
@@ -43,17 +43,14 @@ public List<Assure> getAll() {
 		}
 	return null;
 }
-
-
 @GetMapping(value="/history/{cin}")
-public List<Assure> getHistory(@PathVariable Long cin) {
+public List<Admin> getHistory(@PathVariable Long cin) {
 	return ar.findByCin(cin);
 	
 }
-
 @GetMapping(value="/get/{cin}")
-public Assure getAssure(@PathVariable Long cin) {
-	List<Assure> la = ar.findByCin(cin);
+public Admin getAdmin(@PathVariable Long cin) {
+	List<Admin> la = ar.findByCin(cin);
 	for (int i=0; i<la.size(); i++) {
 		if (la.get(i).isActive()) {
 			return la.get(i);
@@ -62,57 +59,34 @@ public Assure getAssure(@PathVariable Long cin) {
 	return null;
 }
 
-
-@GetMapping(value="/getByCIN/{cin}")
-public Assure getAssureByCIN(@PathVariable Long cin) {
-	
-	return ar.getByCin(cin);
-}
-
-
-
 @PostMapping(value="/create")
-public void createAssure(@RequestBody Assure a) {
+public void createAdmin(@RequestBody Admin a) {
 	ar.save(a);
 }
 
-
-
+@PutMapping(value="/updateadmin/{cin}")
+public void updateAdmin(@PathVariable Long cin, @RequestBody Admin ae) {
+	Admin a = getAdmin(cin);
+	if (a!= null)
+		{ 
+		a.setActive(false);
+		ar.save(a);
+		ae.setActive(true);
+		ae.setDateDerniereModif(new Date());
+		ar.save(ae);
+		}
+}
 
 
 @DeleteMapping(value="/delete/{cin}")
-public void deleteAssure(@PathVariable Long cin) {
-	Assure a = getAssure(cin);
+public void deleteAdmin(@PathVariable Long cin) {
+	Admin a = getAdmin(cin);
 	if (a != null) {	
 		a.setActive(false);
 		ar.save(a);
 	}
 }
 
-	
-
-@GetMapping(value="/bulletin/{id}")
-public Assure getAsureByBulletinId(@PathVariable Long id) {
-	
-	Assure as = null;
-	
-	List<Assure> list = ar.findAll();
-	
-	for(Assure a : list) {
-		
-		for(BulletinSoin b : a.getBulletinSoins()) {
-			System.out.println(b.getId()+"/"+id);
-			System.out.println(b.getId().equals(id));
-			if(b.getId().equals(id))
-				as = a;
-			
-		}
-		
-	}
-	
-	return as;
 }
 
 
-
-}
