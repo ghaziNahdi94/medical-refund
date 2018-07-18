@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 public class Assure extends AssuranceUser{
 	@Enumerated(EnumType.STRING)
@@ -30,7 +32,13 @@ public class Assure extends AssuranceUser{
 	private Poste poste;
 	private int nbrPersonneEnCharge;
 	private String nationnalite;
+<<<<<<< HEAD
 	@OneToMany(mappedBy="assures")
+=======
+
+	@JsonManagedReference
+	@OneToMany(mappedBy="assure")
+>>>>>>> e0371131a3d4ac1bf02611614b9ca7e95ee40f85
 	private List<BulletinSoin> bulletinSoins;
 
 	
@@ -93,18 +101,66 @@ public class Assure extends AssuranceUser{
 		return numAffiliationCnam;
 	}
 
+<<<<<<< HEAD
 	public void setNumAffiliationCnam(String numAffiliationCnam) {
 		this.numAffiliationCnam = numAffiliationCnam;
 	}
 
 	public String getUrlFichierAffiliation() {
 		return urlFichierAffiliation;
+=======
+	public Date getDateAffiliation() {
+		return dateAffiliation;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public void setDateAffiliation(Date dateAffiliation) {
+		this.dateAffiliation = dateAffiliation;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public Role getRole() {
+		return role;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public void setRole(Role role) {
+		this.role = role;
+>>>>>>> e0371131a3d4ac1bf02611614b9ca7e95ee40f85
 	}
 
 	public void setUrlFichierAffiliation(String urlFichierAffiliation) {
 		this.urlFichierAffiliation = urlFichierAffiliation;
 	}
 
+<<<<<<< HEAD
 	public float getSalaire() {
 		return salaire;
 	}
@@ -140,14 +196,22 @@ public class Assure extends AssuranceUser{
 	public Date getDateDerniereModif() {
 		return dateDerniereModif;
 	}
+=======
+
+
+>>>>>>> e0371131a3d4ac1bf02611614b9ca7e95ee40f85
 
 
 
 
 
+<<<<<<< HEAD
 	public void setDateDerniereModif(Date dateDerniereModif) {
 		this.dateDerniereModif = dateDerniereModif;
 	}
+=======
+
+>>>>>>> e0371131a3d4ac1bf02611614b9ca7e95ee40f85
 
 
 
@@ -157,19 +221,86 @@ public class Assure extends AssuranceUser{
 		return nbrPersonneEnCharge;
 	}
 
+
+
+
+
+
+
+
+
+
+
 	public void setNbrPersonneEnCharge(int nbrPersonneEnCharge) {
 		this.nbrPersonneEnCharge = nbrPersonneEnCharge;
 	}
+
+
+
+
+
+
+
+
+
+
 
 	public String getNationnalite() {
 		return nationnalite;
 	}
 
+
+
+
+
+
+
+
+
+
+
 	public void setNationnalite(String nationnalite) {
 		this.nationnalite = nationnalite;
 	}
 
-	
+
+
+
+
+
+
+
+
+
+
+	public List<BulletinSoin> getBulletinSoins() {
+		return bulletinSoins;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public void setBulletinSoins(List<BulletinSoin> bulletinSoins) {
+		this.bulletinSoins = bulletinSoins;
+	}
+
+
+
+
+
+
+
+
+
+
+
 	
 	
 	
