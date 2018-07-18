@@ -28,7 +28,7 @@ public class BulletinSoin implements Serializable{
 	private Date dateValidation;
 	private Date dateAffiliation;
 	private boolean active;
-	
+	//
     @JsonManagedReference
 	@OneToMany(cascade= {CascadeType.ALL}, mappedBy="bulletinSoin")
 	private List<ArticleMedical> articleMedicals;

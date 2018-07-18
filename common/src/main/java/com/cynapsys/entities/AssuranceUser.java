@@ -24,54 +24,37 @@ public class AssuranceUser implements Serializable {
 	@GeneratedValue
 	private Long id;
 	private Long cin;
+	@Temporal(value = TemporalType.DATE)
+	private Date dateCin;
 	private Long numMatricule;
 	private String nom;
-
+	private Sexe sexe;
 	private String prenom;
-
-
-	@Enumerated(EnumType.STRING)
-	private Situation situationFamiliale;
-	private String nomConjoint;
 	private String adresse;
 	private String email;
-	@Enumerated(EnumType.STRING)
-	private Filiere filiereCnam;
-	private String numAffiliationCnam;
-	private String urlFichierAffiliation;
+	private Date dateInscription;
 	@Temporal(value = TemporalType.DATE)
 	private Date dateNaissance;
 	private String password;
-	private float salaire;
 	private boolean active;
 	
-	
 	public AssuranceUser() {}
-	
-	
-	
-	
-	
-	
-	public AssuranceUser(Long cin, Long numMatricule, String nom, String prenom, Situation situationFamiliale,
-			String nomConjoint, String adresse, String email, Filiere filiereCnam, String numAffiliationCnam,
-			String urlFichierAffiliation, Date dateNaissance, String password, float salaire, boolean active) {
-		super();
-		this.id = id;
+
+
+
+	public AssuranceUser(Long cin, Date dateCin, Long numMatricule, String nom, Sexe sexe, String prenom,
+			String adresse, String email, Date dateInscription, Date dateNaissance, String password, boolean active) {
 		this.cin = cin;
+		this.dateCin = dateCin;
 		this.numMatricule = numMatricule;
 		this.nom = nom;
+		this.sexe = sexe;
 		this.prenom = prenom;
-		this.situationFamiliale = situationFamiliale;
-		this.nomConjoint = nomConjoint;
 		this.adresse = adresse;
 		this.email = email;
-		this.filiereCnam = filiereCnam;
-		this.numAffiliationCnam = numAffiliationCnam;
-		this.urlFichierAffiliation = urlFichierAffiliation;
+		this.dateInscription = dateInscription;
 		this.dateNaissance = dateNaissance;
 		this.password = password;
-		this.salaire = salaire;
 		this.active = active;
 	}
 
@@ -79,107 +62,150 @@ public class AssuranceUser implements Serializable {
 
 
 
+
+
+
+
+
+
+	public Date getDateInscription() {
+		return dateInscription;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public void setDateInscription(Date dateInscription) {
+		this.dateInscription = dateInscription;
+	}
 
 	public Long getId() {
 		return id;
 	}
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+
 	public Long getCin() {
 		return cin;
 	}
+
+
 	public void setCin(Long cin) {
 		this.cin = cin;
 	}
+
+
+	public Date getDateCin() {
+		return dateCin;
+	}
+
+
+	public void setDateCin(Date dateCin) {
+		this.dateCin = dateCin;
+	}
+
+
 	public Long getNumMatricule() {
 		return numMatricule;
 	}
+
+
 	public void setNumMatricule(Long numMatricule) {
 		this.numMatricule = numMatricule;
 	}
+
+
 	public String getNom() {
 		return nom;
 	}
+
+
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
+
+	public Sexe getSexe() {
+		return sexe;
+	}
+
+
+	public void setSexe(Sexe sexe) {
+		this.sexe = sexe;
+	}
+
+
 	public String getPrenom() {
 		return prenom;
 	}
+
+
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	public Situation getSituationFamiliale() {
-		return situationFamiliale;
-	}
-	public void setSituationFamiliale(Situation situationFamiliale) {
-		this.situationFamiliale = situationFamiliale;
-	}
-	public String getNomConjoint() {
-		return nomConjoint;
-	}
-	public void setNomConjoint(String nomConjoint) {
-		this.nomConjoint = nomConjoint;
-	}
+
+
+
 	public String getAdresse() {
 		return adresse;
 	}
+
+
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
+
+
 	public String getEmail() {
 		return email;
 	}
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Filiere getFiliereCnam() {
-		return filiereCnam;
-	}
-	public void setFiliereCnam(Filiere filiereCnam) {
-		this.filiereCnam = filiereCnam;
-	}
-	public String getNumAffiliationCnam() {
-		return numAffiliationCnam;
-	}
-	public void setNumAffiliationCnam(String numAffiliationCnam) {
-		this.numAffiliationCnam = numAffiliationCnam;
-	}
-	public String getUrlFichierAffiliation() {
-		return urlFichierAffiliation;
-	}
-	public void setUrlFichierAffiliation(String urlFichierAffiliation) {
-		this.urlFichierAffiliation = urlFichierAffiliation;
-	}
+
+
 	public Date getDateNaissance() {
 		return dateNaissance;
 	}
+
+
 	public void setDateNaissance(Date dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
+
+
 	public String getPassword() {
 		return password;
 	}
+
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public float getSalaire() {
-		return salaire;
-	}
-	public void setSalaire(float salaire) {
-		this.salaire = salaire;
-	}
+
+
 	public boolean isActive() {
 		return active;
 	}
+
+
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
+
 
 	
-	
-	
-
 	}

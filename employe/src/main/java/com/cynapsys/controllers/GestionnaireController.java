@@ -2,6 +2,7 @@ package com.cynapsys.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,24 +14,27 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.cynapsys.entities.Assure;
+
 import com.cynapsys.entities.Admin;
-import com.cynapsys.entities.AssuranceUser;
+import com.cynapsys.entities.Assure;
+import com.cynapsys.entities.Gestionnaire;
 import com.cynapsys.repositories.AdminRepository;
 import com.cynapsys.repositories.AssureRepository;
+import com.cynapsys.repositories.GestionnaireRepository;
 
 @RestController
-@RequestMapping(value="/assure")
+@RequestMapping(value="/gestionnaire")
 @CrossOrigin("*")
-public class AssureController {
+public class GestionnaireController {
+
 
 	@Autowired
-	private AssureRepository ar;
-	private List<Assure> laf;
+	private GestionnaireRepository ar;
+	private List<Gestionnaire> laf;
 @GetMapping(value="/all")
-public List<Assure> getAll() {
-	List<Assure> la = ar.findAll();
-	List<Assure> laf = new ArrayList<Assure>();
+public List<Gestionnaire> getAll() {
+	List<Gestionnaire> la = ar.findAll();
+	List<Gestionnaire> laf = new ArrayList<Gestionnaire>();
 		 if (la.size() != 0) {
 			for(int i=0; i<la.size(); i++) {
 				if (la.get(i).isActive())
@@ -42,16 +46,14 @@ public List<Assure> getAll() {
 		}
 	return null;
 }
-
 @GetMapping(value="/history/{cin}")
-public List<Assure> getHistory(@PathVariable Long cin) {
+public List<Gestionnaire> getHistory(@PathVariable Long cin) {
 	return ar.findByCin(cin);
 	
 }
-
 @GetMapping(value="/get/{cin}")
-public Assure getAssure(@PathVariable Long cin) {
-	List<Assure> la = ar.findByCin(cin);
+public Gestionnaire getGestionnaire(@PathVariable Long cin) {
+	List<Gestionnaire> la = ar.findByCin(cin);
 	for (int i=0; i<la.size(); i++) {
 		if (la.get(i).isActive()) {
 			return la.get(i);
@@ -61,13 +63,13 @@ public Assure getAssure(@PathVariable Long cin) {
 }
 
 @PostMapping(value="/create")
-public void createAssure(@RequestBody Assure a) {
+public void createGestionnaire(@RequestBody Gestionnaire a) {
 	ar.save(a);
 }
 
 @PutMapping(value="/update/{cin}")
-public void updateAssure(@RequestBody Assure ae, @PathVariable Long cin) {
-	Assure a = getAssure(cin);
+public void updateGestionnaire(@RequestBody Gestionnaire ae, @PathVariable Long cin) {
+	Gestionnaire a = getGestionnaire(cin);
 	if (a!= null)
 		{
 		a.setActive(false);
@@ -79,12 +81,14 @@ public void updateAssure(@RequestBody Assure ae, @PathVariable Long cin) {
 }
 
 @DeleteMapping(value="/delete/{cin}")
-public void deleteAssure(@PathVariable Long cin) {
-	Assure a = getAssure(cin);
+public void deleteGestionnaire(@PathVariable Long cin) {
+	Gestionnaire a = getGestionnaire(cin);
 	if (a != null) {	
 		a.setActive(false);
 		ar.save(a);
 	}
 }
 
+
 }
+
