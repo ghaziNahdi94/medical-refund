@@ -1,5 +1,6 @@
 package com.cynapsys.Repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +15,8 @@ import com.cynapsys.entities.BulletinSoin;
 @Transactional
 public interface BulletinSoinRepository extends CrudRepository<BulletinSoin, Long>{
 
-	
-
+	public BulletinSoin getById(Long id);
+	public List<BulletinSoin> findAll();
+	public List<BulletinSoin> findByBordereauId(Long bordereauId);
 	
 }
