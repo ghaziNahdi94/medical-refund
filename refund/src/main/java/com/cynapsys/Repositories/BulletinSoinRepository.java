@@ -18,5 +18,6 @@ public interface BulletinSoinRepository extends CrudRepository<BulletinSoin, Lon
 	public BulletinSoin getById(Long id);
 	public List<BulletinSoin> findAll();
 	public List<BulletinSoin> findByBordereauId(Long bordereauId);
+	public List<BulletinSoin> findByAssureId(Long id);
 	
 }

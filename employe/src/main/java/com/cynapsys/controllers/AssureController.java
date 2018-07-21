@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,8 @@ import com.cynapsys.entities.BulletinSoin;
 import com.cynapsys.entities.AssuranceUser;
 import com.cynapsys.repositories.AdminRepository;
 import com.cynapsys.repositories.AssureRepository;
+import com.cynapsys.utile.Email;
+import com.cynapsys.utile.EmailSender;
 
 @RestController
 @RequestMapping(value="/assure")
@@ -28,6 +32,10 @@ public class AssureController {
 	@Autowired
 	private AssureRepository ar;
 	private List<Assure> laf;
+	
+	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	
+	
 @GetMapping(value="/all")
 public List<Assure> getAll() {
 	List<Assure> la = ar.findAll();
@@ -73,6 +81,7 @@ public Assure getAssureByCIN(@PathVariable Long cin) {
 
 @PostMapping(value="/create")
 public void createAssure(@RequestBody Assure a) {
+	a.setPassword(passwordEncoder.encode(a.getPassword()));
 	ar.save(a);
 }
 
@@ -112,6 +121,43 @@ public Assure getAsureByBulletinId(@PathVariable Long id) {
 	
 	return as;
 }
+
+
+
+
+
+
+@GetMapping("/get/auth/{email}/{password}")
+public Assure getByEmail(@PathVariable String email, @PathVariable String password) {
+	
+	Assure a =  ar.findByEmail(email);
+	
+	if(a != null) {
+		
+		if(passwordEncoder.matches(password, a.getPassword())) {
+			
+			return a;
+			
+		}
+		
+	}
+	
+	return null;
+}
+
+
+
+
+@PostMapping("/email")
+public String sendEmail(@RequestBody Email email) {
+	
+	
+	EmailSender.sendEmail(email.getObjet(), email.getMsg(), email.getFrom(), email.getTo());
+	
+	
+	return "succés";
+}
+
 
 
 

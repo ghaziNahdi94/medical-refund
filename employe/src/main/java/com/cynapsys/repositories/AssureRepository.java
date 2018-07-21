@@ -23,6 +23,6 @@ public interface AssureRepository extends CrudRepository<Assure, Long>{
 	public Assure getByCin(Long cin);
 	public Assure getById(Long id);
 
-
+	public Assure findByEmail(String email);
 	
 }

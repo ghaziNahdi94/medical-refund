@@ -315,6 +315,8 @@ public class BulletinSoinController {
             return fileName;
     }
     
+    //-----------------------------------
+    
     
     
     @GetMapping("/validationBulletin/{id}")
@@ -322,7 +324,7 @@ public class BulletinSoinController {
     	
     	BulletinSoin bulletin = bsr.getById(id);
     	
-    	bulletin.setEtat("Validé");
+    	bulletin.setEtat("Remboursé");
     	bulletin.setDateValidation(new Date());
     	
     	bsr.save(bulletin);
@@ -339,5 +341,30 @@ public class BulletinSoinController {
     	
     }
     
+    
+    @GetMapping("/byAssureId/{id}")
+    public List<BulletinSoin> getBulletinByAssureId(@PathVariable Long id) {
+    	
+    	return bsr.findByAssureId(id);
+    	
+    }
+    
+    
+    @GetMapping("/totale/{id}")
+    public Long getTotaleRemboursement(@PathVariable Long id) {
+    	
+    	long result = 0l;
+    	List<BulletinSoin> bulletins = bsr.findByAssureId(id);
+    	
+    	for(BulletinSoin b : bulletins) {
+    		
+    		if(b.getEtat().equals("Remboursé"))
+    		result += b.getMontantRembourse();
+    		
+    	}
+    	
+    	return result;
+    	
+    }
     
 }

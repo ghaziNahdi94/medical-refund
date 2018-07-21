@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,11 @@ public class GestionnaireController {
 	@Autowired
 	private GestionnaireRepository ar;
 	private List<Gestionnaire> laf;
+	
+	
+	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+	
 @GetMapping(value="/all")
 public List<Gestionnaire> getAll() {
 	List<Gestionnaire> la = ar.findAll();
@@ -64,6 +70,7 @@ public Gestionnaire getGestionnaire(@PathVariable Long cin) {
 
 @PostMapping(value="/create")
 public void createGestionnaire(@RequestBody Gestionnaire a) {
+	a.setPassword(passwordEncoder.encode(a.getPassword()));
 	ar.save(a);
 }
 
@@ -87,6 +94,25 @@ public void deleteGestionnaire(@PathVariable Long cin) {
 		a.setActive(false);
 		ar.save(a);
 	}
+}
+
+
+
+@GetMapping("/get/auth/{email}/{password}")
+public Gestionnaire getByEmail(@PathVariable String email, @PathVariable String password) {
+	
+	Gestionnaire g  = ar.findByEmail(email);
+	
+	if(g != null) {
+		
+		if(passwordEncoder.matches(password, g.getPassword())) {
+			
+			return g;
+		}
+		
+	}
+	
+	return null;
 }
 
 

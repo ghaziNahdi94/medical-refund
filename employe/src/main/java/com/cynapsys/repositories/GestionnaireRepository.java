@@ -10,4 +10,6 @@ import com.cynapsys.entities.Gestionnaire;
 public interface GestionnaireRepository extends CrudRepository<Gestionnaire, Long> {
 	public List<Gestionnaire> findByCin(Long cin);
 	public List<Gestionnaire> findAll();
+	
+	public Gestionnaire findByEmail(String email);
 }
