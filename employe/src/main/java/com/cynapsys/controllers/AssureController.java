@@ -1,8 +1,10 @@
 package com.cynapsys.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +24,7 @@ import com.cynapsys.entities.AssuranceUser;
 import com.cynapsys.repositories.AdminRepository;
 import com.cynapsys.repositories.AssureRepository;
 import com.cynapsys.utile.Email;
+import com.cynapsys.utile.EmailRepository;
 import com.cynapsys.utile.EmailSender;
 
 @RestController
@@ -29,6 +32,9 @@ import com.cynapsys.utile.EmailSender;
 @CrossOrigin("*")
 public class AssureController {
 
+	@Autowired
+	private EmailRepository er;
+	
 	@Autowired
 	private AssureRepository ar;
 	private List<Assure> laf;
@@ -154,10 +160,36 @@ public String sendEmail(@RequestBody Email email) {
 	
 	EmailSender.sendEmail(email.getObjet(), email.getMsg(), email.getFrom(), email.getTo());
 	
+	email.setDateReclamation(new Date());
+	
+	er.save(email);
 	
 	return "succés";
 }
 
+
+
+
+
+@GetMapping("/resetPassword/{emailStr}")
+public String resetPassword(@PathVariable String emailStr) {
+	
+	Assure assure = ar.findByEmail(emailStr);
+	
+	String newPassword = RandomStringUtils.randomAlphanumeric(10);
+	
+	assure.setPassword(passwordEncoder.encode(newPassword));
+	
+	ar.save(assure);
+	
+	String objet = "Réinitialisation de votre mot de passe";
+	String msg = "Vous pouvez accédez à votre compte avec ce nouveau mot de passe : "+newPassword;
+	String destinaire = emailStr;
+	
+	EmailSender.sendEmail(objet, msg, destinaire);
+	
+	return "success";
+}
 
 
 

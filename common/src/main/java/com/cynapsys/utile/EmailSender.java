@@ -61,6 +61,49 @@ public class EmailSender {
 	}
 	
 	
-	
+	public static void sendEmail(String objet, String msg,String destinaire) {
+		
+		Properties prop = new Properties();
+		prop.setProperty("mail.transport.protocol", "smtp");
+		prop.setProperty("mail.smtp.host", "smtp.gmail.com");
+		prop.setProperty("mail.smtp.user", ACCOUT_USER);
+		prop.setProperty("mail.from", ACCOUT_USER);
+		
+		prop.setProperty("mail.smtp.starttls.enable", "true");
+
+		
+		Session session = Session.getInstance(prop);
+		
+		
+		MimeMessage message = new MimeMessage(session);
+		
+		try {
+			
+			message.setSubject(objet);
+			message.setText(msg);
+			message.addRecipients(Message.RecipientType.TO, destinaire);
+			
+			
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		try {
+			
+			Transport transport = session.getTransport("smtp");
+			transport.connect(ACCOUT_USER, ACCOUT_PASSWORD);
+			transport.sendMessage(message, new Address[] {new InternetAddress(destinaire)});
+			
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+
 	
 }

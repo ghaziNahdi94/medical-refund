@@ -31,7 +31,9 @@ public class RessourceOAuthSecurityConfiguration  extends  ResourceServerConfigu
 		http.csrf().disable();
 		
 		http.authorizeRequests().antMatchers("/bulletin/downloadBulletinFile/**").permitAll()
-		.antMatchers("/bulletin/downloadArticleFile/**").permitAll().and().authorizeRequests()
+		.antMatchers("/bulletin/downloadArticleFile/**").permitAll()
+		.antMatchers("/assure/resetPassword/**").permitAll()
+		.and().authorizeRequests()
 				.anyRequest().authenticated();
 				
 		
