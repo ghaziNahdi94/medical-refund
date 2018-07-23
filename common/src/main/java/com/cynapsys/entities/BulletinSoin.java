@@ -32,6 +32,8 @@ public class BulletinSoin implements Serializable{
 	private Date dateAffiliation;
 	private Date dateSoin;
 	private boolean active;
+	private float remboursement;
+	private String urlRemboursement;
 	
     @JsonManagedReference
 	@OneToMany(cascade= {CascadeType.ALL}, mappedBy="bulletinSoin")
@@ -210,6 +212,26 @@ public class BulletinSoin implements Serializable{
 
 	public void setAssure(Assure assure) {
 		this.assure = assure;
+	}
+
+
+	public float getRemboursement() {
+		return remboursement;
+	}
+
+
+	public void setRemboursement(float remboursement) {
+		this.remboursement = remboursement;
+	}
+
+
+	public String getUrlRemboursement() {
+		return urlRemboursement;
+	}
+
+
+	public void setUrlRemboursement(String urlRemboursement) {
+		this.urlRemboursement = urlRemboursement;
 	}
 
 
