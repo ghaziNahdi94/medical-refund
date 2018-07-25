@@ -7,11 +7,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Arrays;
+=======
+>>>>>>> 81c511dbf5eee0af600592798bff3fef6f53ce9b
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
+<<<<<<< HEAD
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+=======
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+>>>>>>> 81c511dbf5eee0af600592798bff3fef6f53ce9b
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +51,9 @@ import com.cynapsys.entities.Gestionnaire;
 import com.cynapsys.entities.AssuranceUser;
 import com.cynapsys.repositories.AdminRepository;
 import com.cynapsys.repositories.AssureRepository;
+import com.cynapsys.utile.Email;
+import com.cynapsys.utile.EmailRepository;
+import com.cynapsys.utile.EmailSender;
 
 @RestController
 @RequestMapping(value="/assure")
@@ -51,7 +63,11 @@ public class AssureController {
 	private final String UPLOADED_FOLDER_AFF_FILE = "C:\\Users\\Toshiba\\Desktop\\stage\\ficheAffiliation";
 
 	@Autowired
+	private EmailRepository er;
+	
+	@Autowired
 	private AssureRepository ar;
+<<<<<<< HEAD
 	private List<Assure> laf;	
 	 @Autowired
 	    private JavaMailSender mailSender;
@@ -72,6 +88,13 @@ public class AssureController {
     	}
 	
 	 
+=======
+	private List<Assure> laf;
+	
+	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	
+	
+>>>>>>> 81c511dbf5eee0af600592798bff3fef6f53ce9b
 @GetMapping(value="/all")
 public List<Assure> getAll() {
 	List<Assure> la = ar.findAll();
@@ -184,6 +207,7 @@ public Assure getAssureByCIN(@PathVariable Long cin) {
 
 @PostMapping(value="/create")
 public void createAssure(@RequestBody Assure a) {
+	a.setPassword(passwordEncoder.encode(a.getPassword()));
 	ar.save(a);
 }
 
@@ -236,6 +260,69 @@ public void updateAssure(@PathVariable Long cin, @RequestBody Assure ae) {
 		ar.save(ae);
 		}
 }
+
+
+
+
+
+@GetMapping("/get/auth/{email}/{password}")
+public Assure getByEmail(@PathVariable String email, @PathVariable String password) {
+	
+	Assure a =  ar.findByEmail(email);
+	
+	if(a != null) {
+		
+		if(passwordEncoder.matches(password, a.getPassword())) {
+			
+			return a;
+			
+		}
+		
+	}
+	
+	return null;
+}
+
+
+
+
+@PostMapping("/email")
+public String sendEmail(@RequestBody Email email) {
+	
+	
+	EmailSender.sendEmail(email.getObjet(), email.getMsg(), email.getFrom(), email.getTo());
+	
+	email.setDateReclamation(new Date());
+	
+	er.save(email);
+	
+	return "succés";
+}
+
+
+
+
+
+@GetMapping("/resetPassword/{emailStr}")
+public String resetPassword(@PathVariable String emailStr) {
+	
+	Assure assure = ar.findByEmail(emailStr);
+	
+	String newPassword = RandomStringUtils.randomAlphanumeric(10);
+	
+	assure.setPassword(passwordEncoder.encode(newPassword));
+	
+	ar.save(assure);
+	
+	String objet = "Réinitialisation de votre mot de passe";
+	String msg = "Vous pouvez accédez à votre compte avec ce nouveau mot de passe : "+newPassword;
+	String destinaire = emailStr;
+	
+	EmailSender.sendEmail(objet, msg, destinaire);
+	
+	return "success";
+}
+
 
 
 }

@@ -6,8 +6,12 @@ import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+=======
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+>>>>>>> 81c511dbf5eee0af600592798bff3fef6f53ce9b
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +35,9 @@ public class AdminController {
 
 	@Autowired
 	private AdminRepository ar;
+	
 	private List<Admin> laf;
+<<<<<<< HEAD
 	 @Autowired
 	    private JavaMailSender mailSender;
 	@RequestMapping("/sendmail/{cin}")
@@ -49,6 +55,12 @@ public class AdminController {
      mailSender.send(message);
  }
  	}
+=======
+	
+	
+	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	
+>>>>>>> 81c511dbf5eee0af600592798bff3fef6f53ce9b
 	
 	
 @GetMapping(value="/all")
@@ -90,6 +102,7 @@ public Admin getAdmin(@PathVariable Long cin) {
 
 @PostMapping(value="/create")
 public void createAdmin(@RequestBody Admin a) {
+	a.setPassword(passwordEncoder.encode(a.getPassword()));
 	ar.save(a);
 }
 
@@ -108,6 +121,9 @@ public void updateAdmin(@PathVariable Long cin, @RequestBody Admin ae) {
 }
 
 
+
+
+
 @DeleteMapping(value="/delete/{cin}")
 public void deleteAdmin(@PathVariable Long cin) {
 	Admin a = getAdmin(cin);
@@ -116,6 +132,28 @@ public void deleteAdmin(@PathVariable Long cin) {
 		ar.save(a);
 	}
 }
+
+
+
+@GetMapping("/get/auth/{email}/{password}")
+public Admin getByEmail(@PathVariable String email, @PathVariable String password) {
+	
+	Admin a = ar.findByEmail(email);
+	
+	if (a != null) {
+	
+		
+		if(passwordEncoder.matches(password, a.getPassword())) {
+			
+		return a;	
+			
+		}		
+	}
+	
+	return null;
+}
+
+
 
 }
 

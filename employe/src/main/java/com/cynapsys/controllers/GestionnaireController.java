@@ -6,8 +6,12 @@ import java.util.Optional;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+=======
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+>>>>>>> 81c511dbf5eee0af600592798bff3fef6f53ce9b
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +39,7 @@ public class GestionnaireController {
 	@Autowired
 	private GestionnaireRepository ar;
 	private List<Gestionnaire> laf;
+<<<<<<< HEAD
 	 @Autowired
 	    private JavaMailSender mailSender;
 	    // Use it to send Simple text emails
@@ -55,6 +60,11 @@ public class GestionnaireController {
 	        mailSender.send(message);
 	    }
 	    	}
+=======
+	
+	
+	private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+>>>>>>> 81c511dbf5eee0af600592798bff3fef6f53ce9b
 
 	
 @GetMapping(value="/all")
@@ -96,6 +106,7 @@ public Gestionnaire getGestionnaire(@PathVariable Long cin) {
 
 @PostMapping(value="/create")
 public void createGestionnaire(@RequestBody Gestionnaire a) {
+	a.setPassword(passwordEncoder.encode(a.getPassword()));
 	ar.save(a);
 }
 
@@ -120,6 +131,25 @@ public void deleteGestionnaire(@PathVariable Long cin) {
 		a.setActive(false);
 		ar.save(a);
 	}
+}
+
+
+
+@GetMapping("/get/auth/{email}/{password}")
+public Gestionnaire getByEmail(@PathVariable String email, @PathVariable String password) {
+	
+	Gestionnaire g  = ar.findByEmail(email);
+	
+	if(g != null) {
+		
+		if(passwordEncoder.matches(password, g.getPassword())) {
+			
+			return g;
+		}
+		
+	}
+	
+	return null;
 }
 
 

@@ -63,6 +63,7 @@ public class BulletinSoinController {
 	private final String UPLOADED_FOLDER_BULLETIN = "C:\\Users\\Toshiba\\Desktop\\stage\\bulletins";
 	private final String UPLOADED_FOLDER_ARTICLES = UPLOADED_FOLDER_BULLETIN+"\\articles\\";
 
+
 	
 	
 	@Autowired
@@ -315,20 +316,11 @@ public class BulletinSoinController {
             return fileName;
     }
     
+    //-----------------------------------
     
     
-    @GetMapping("/validationBulletin/{id}")
-    public String validationBulletin(@PathVariable Long id) {
-    	
-    	BulletinSoin bulletin = bsr.getById(id);
-    	
-    	bulletin.setEtat("Validé");
-    	bulletin.setDateValidation(new Date());
-    	
-    	bsr.save(bulletin);
-    	
-    	return "succés";
-    }
+    
+ 
     
     
     
@@ -338,6 +330,59 @@ public class BulletinSoinController {
     	return bsr.findByBordereauId(id);
     	
     }
+    
+    
+    @GetMapping("/byAssureId/{id}")
+    public List<BulletinSoin> getBulletinByAssureId(@PathVariable Long id) {
+    	
+    	return bsr.findByAssureId(id);
+    	
+    }
+    
+    
+    @GetMapping("/totale/{id}")
+    public Long getTotaleRemboursement(@PathVariable Long id) {
+    	
+    	long result = 0l;
+    	List<BulletinSoin> bulletins = bsr.findByAssureId(id);
+    	
+    	for(BulletinSoin b : bulletins) {
+    		
+    		if(b.getEtat().equals("Remboursé"))
+    		result += b.getRemboursement();
+    		
+    	}
+    	
+    	return result;
+    	
+    }
+    
+    
+    
+    
+    
+    
+    @PutMapping("/remboursement/{id}")
+    public String rembourser(@RequestBody BulletinSoin bulletinSoin, @PathVariable Long id) {
+    	
+    	
+    	BulletinSoin bulletin = bsr.getById(id);
+    	
+    	bulletin.setEtat("Remboursé");
+    	bulletin.setDateValidation(new Date());
+    	
+    	
+    	bulletin.setUrlRemboursement(bulletinSoin.getUrlRemboursement());
+    	bulletin.setRemboursement(bulletinSoin.getRemboursement());
+    	bulletin.setResultat(bulletinSoin.getResultat());
+
+    	
+    	bsr.save(bulletin);
+    	
+    	return "succés";
+    }
+    
+    
     
     
 }
