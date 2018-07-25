@@ -15,7 +15,7 @@ public class Gestionnaire extends AssuranceUser  {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Gestionnaire(Long cin, Date dateCin, Long numMatricule, String nom, Sexe sexe, String prenom, String adresse,
+	public Gestionnaire(Long cin, Date dateCin, Long numMatricule, String nom, String sexe, String prenom, String adresse,
 			String email, Date dateInscription, Date dateNaissance, String password, boolean active,
 			Date dateDerniereModif) {
 		super(cin, dateCin, numMatricule, nom, sexe, prenom, adresse, email, dateInscription, dateNaissance, password,

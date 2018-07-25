@@ -37,9 +37,8 @@ public class BulletinSoin implements Serializable{
 	@OneToMany(cascade= {CascadeType.ALL}, mappedBy="bulletinSoin")
 	private List<ArticleMedical> articleMedicals;
 	
-	@ManyToOne
-	@JoinColumn(name="idBordereau")
-	private Bordereau bordereaux;
+   
+	private Long bordereauId;
 	
 	
 	@JsonBackReference
@@ -55,7 +54,7 @@ public class BulletinSoin implements Serializable{
 
 	public BulletinSoin(Long id, Long numBulletin, String urlBulletin, float montantRembourse, float montantPharmacie,
 			String etat, String resultat, Date dateValidation, Date dateAffiliation, Date dateSoin, boolean active,
-			List<ArticleMedical> articleMedicals, Bordereau bordereaux, Assure assure) {
+			List<ArticleMedical> articleMedicals, Long bordereauId, Assure assure) {
 		super();
 		this.id = id;
 		this.numBulletin = numBulletin;
@@ -69,7 +68,7 @@ public class BulletinSoin implements Serializable{
 		this.dateSoin = dateSoin;
 		this.active = active;
 		this.articleMedicals = articleMedicals;
-		this.bordereaux = bordereaux;
+		this.bordereauId = bordereauId;
 		this.assure = assure;
 	}
 
@@ -194,13 +193,13 @@ public class BulletinSoin implements Serializable{
 	}
 
 
-	public Bordereau getBordereaux() {
-		return bordereaux;
+	public Long getBordereauId() {
+		return bordereauId;
 	}
 
 
-	public void setBordereaux(Bordereau bordereaux) {
-		this.bordereaux = bordereaux;
+	public void setBordereauId(Long bordereauId) {
+		this.bordereauId = bordereauId;
 	}
 
 
@@ -213,14 +212,6 @@ public class BulletinSoin implements Serializable{
 		this.assure = assure;
 	}
 
-
-	
-
-
-
-
-
-	
 
 	
 	

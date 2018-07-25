@@ -32,13 +32,9 @@ public class Assure extends AssuranceUser{
 	private Poste poste;
 	private int nbrPersonneEnCharge;
 	private String nationnalite;
-<<<<<<< HEAD
-	@OneToMany(mappedBy="assures")
-=======
-
-	@JsonManagedReference
+	
 	@OneToMany(mappedBy="assure")
->>>>>>> e0371131a3d4ac1bf02611614b9ca7e95ee40f85
+	@JsonManagedReference
 	private List<BulletinSoin> bulletinSoins;
 
 	
@@ -49,13 +45,13 @@ public class Assure extends AssuranceUser{
 
 
 
-	public Assure(Long cin, Date dateCin, Long numMatricule, String nom, Sexe sexe, String prenom,
-			String adresse, String email, Date dateInscription, Date dateNaissance, String password, boolean active,
+	public Assure(Long cin, Date dateCin, Long numMatricule, String nom, String sexe, String prenom, String adresse,
+			String email, Date dateInscription, Date dateNaissance, String password, boolean active,
 			Situation situationFamiliale, String nomConjoint, Filiere filiereCnam, String numAffiliationCnam,
 			String urlFichierAffiliation, Date dateDerniereModif, float salaire, Poste poste, int nbrPersonneEnCharge,
 			String nationnalite, List<BulletinSoin> bulletinSoins) {
-		super(cin, dateCin, numMatricule, nom, sexe, prenom, adresse, email, dateInscription, dateNaissance,
-				password, active);
+		super(cin, dateCin, numMatricule, nom, sexe, prenom, adresse, email, dateInscription, dateNaissance, password,
+				active);
 		this.situationFamiliale = situationFamiliale;
 		this.nomConjoint = nomConjoint;
 		this.filiereCnam = filiereCnam;
@@ -71,103 +67,89 @@ public class Assure extends AssuranceUser{
 
 
 
-
-
 	public Situation getSituationFamiliale() {
 		return situationFamiliale;
 	}
+
+
 
 	public void setSituationFamiliale(Situation situationFamiliale) {
 		this.situationFamiliale = situationFamiliale;
 	}
 
+
+
 	public String getNomConjoint() {
 		return nomConjoint;
 	}
+
+
 
 	public void setNomConjoint(String nomConjoint) {
 		this.nomConjoint = nomConjoint;
 	}
 
+
+
 	public Filiere getFiliereCnam() {
 		return filiereCnam;
 	}
+
+
 
 	public void setFiliereCnam(Filiere filiereCnam) {
 		this.filiereCnam = filiereCnam;
 	}
 
+
+
 	public String getNumAffiliationCnam() {
 		return numAffiliationCnam;
 	}
 
-<<<<<<< HEAD
+
+
 	public void setNumAffiliationCnam(String numAffiliationCnam) {
 		this.numAffiliationCnam = numAffiliationCnam;
 	}
 
+
+
 	public String getUrlFichierAffiliation() {
 		return urlFichierAffiliation;
-=======
-	public Date getDateAffiliation() {
-		return dateAffiliation;
 	}
 
 
-
-
-
-
-
-
-
-
-
-	public void setDateAffiliation(Date dateAffiliation) {
-		this.dateAffiliation = dateAffiliation;
-	}
-
-
-
-
-
-
-
-
-
-
-
-	public Role getRole() {
-		return role;
-	}
-
-
-
-
-
-
-
-
-
-
-
-	public void setRole(Role role) {
-		this.role = role;
->>>>>>> e0371131a3d4ac1bf02611614b9ca7e95ee40f85
-	}
 
 	public void setUrlFichierAffiliation(String urlFichierAffiliation) {
 		this.urlFichierAffiliation = urlFichierAffiliation;
 	}
 
-<<<<<<< HEAD
+
+
+	public Date getDateDerniereModif() {
+		return dateDerniereModif;
+	}
+
+
+
+	public void setDateDerniereModif(Date dateDerniereModif) {
+		this.dateDerniereModif = dateDerniereModif;
+	}
+
+
+
 	public float getSalaire() {
 		return salaire;
 	}
 
+
+
 	public void setSalaire(float salaire) {
 		this.salaire = salaire;
 	}
+
+
 
 	public Poste getPoste() {
 		return poste;
@@ -181,53 +163,9 @@ public class Assure extends AssuranceUser{
 
 
 
-	public List<BulletinSoin> getBulletinSoins() {
-		return bulletinSoins;
-	}
-
-
-
-	public void setBulletinSoins(List<BulletinSoin> bulletinSoins) {
-		this.bulletinSoins = bulletinSoins;
-	}
-
-	
-
-	public Date getDateDerniereModif() {
-		return dateDerniereModif;
-	}
-=======
-
-
->>>>>>> e0371131a3d4ac1bf02611614b9ca7e95ee40f85
-
-
-
-
-
-<<<<<<< HEAD
-	public void setDateDerniereModif(Date dateDerniereModif) {
-		this.dateDerniereModif = dateDerniereModif;
-	}
-=======
-
->>>>>>> e0371131a3d4ac1bf02611614b9ca7e95ee40f85
-
-
-
-
-
 	public int getNbrPersonneEnCharge() {
 		return nbrPersonneEnCharge;
 	}
-
-
-
-
-
-
-
-
 
 
 
@@ -237,25 +175,9 @@ public class Assure extends AssuranceUser{
 
 
 
-
-
-
-
-
-
-
-
 	public String getNationnalite() {
 		return nationnalite;
 	}
-
-
-
-
-
-
-
-
 
 
 
@@ -265,25 +187,9 @@ public class Assure extends AssuranceUser{
 
 
 
-
-
-
-
-
-
-
-
 	public List<BulletinSoin> getBulletinSoins() {
 		return bulletinSoins;
 	}
-
-
-
-
-
-
-
-
 
 
 
@@ -292,19 +198,8 @@ public class Assure extends AssuranceUser{
 	}
 
 
-
-
-
-
-
-
-
-
-
-	
-	
-	
 	
 
+	
 }
 

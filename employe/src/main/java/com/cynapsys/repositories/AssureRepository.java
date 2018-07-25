@@ -17,19 +17,12 @@ import com.cynapsys.entities.Assure;
 @Transactional
 @Repository
 public interface AssureRepository extends CrudRepository<Assure, Long>{
-<<<<<<< HEAD
+
 	public List<Assure> findByCin(Long cin);
 	public List<Assure> findAll();
-=======
-
-	
 	public Assure getByCin(Long cin);
-	public List<Assure> findAll();
 	public Assure getById(Long id);
->>>>>>> e0371131a3d4ac1bf02611614b9ca7e95ee40f85
 
 
-
-	
 	
 }

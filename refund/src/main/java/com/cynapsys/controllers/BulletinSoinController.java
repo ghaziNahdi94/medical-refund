@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
+import javax.websocket.server.PathParam;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -37,13 +38,16 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cynapsys.Repositories.BordereauRepository;
 import com.cynapsys.Repositories.BulletinSoinRepository;
+import com.cynapsys.Repositories.ParametresRepository;
 import com.cynapsys.entities.ArticleMedical;
 import com.cynapsys.entities.BulletinSoin;
 import com.mysql.fabric.xmlrpc.base.Array;
@@ -56,7 +60,7 @@ public class BulletinSoinController {
 
 	private final Logger logger = LoggerFactory.getLogger(BulletinSoinController.class) ;
 	
-	private final String UPLOADED_FOLDER_BULLETIN = "C:\\Users\\ghazi\\Desktop\\stage cynapsys\\bulletins\\";
+	private final String UPLOADED_FOLDER_BULLETIN = "C:\\Users\\Toshiba\\Desktop\\stage\\bulletins";
 	private final String UPLOADED_FOLDER_ARTICLES = UPLOADED_FOLDER_BULLETIN+"\\articles\\";
 
 	
@@ -64,7 +68,11 @@ public class BulletinSoinController {
 	@Autowired
 	private BulletinSoinRepository bsr;
 	
+	@Autowired
+	private ParametresRepository pr;
 	
+	@Autowired
+	private BordereauRepository br;
 	
 	
 	
@@ -211,8 +219,55 @@ public class BulletinSoinController {
 	
 	
 	
+
 	
 	
+	@PostMapping("/defaultDateConfig")
+	public String defaultConfigParametres() {
+		
+		
+		
+		
+		//Les dates par défaut   forme:(jour;heure:minute)
+		List<String> dates = new ArrayList();
+		String date1 = "1;8:30";
+		String date2 = "16;8:30";
+		dates.add(date1);
+		dates.add(date2);
+		
+		
+		Parametres p = pr.findById(0);
+
+		p.setDatesEnvoi(dates);
+		
+		
+		pr.save(p);
+		
+		return "succes";
+	}
+	
+	
+	@GetMapping("/getDateConfig")
+	public List<String> getConfig() {
+		
+		return pr.findById(0).getDatesEnvoi();
+	}
+	
+	
+	
+	
+	
+	@PutMapping("/updateDateConfig")
+	public String addDate(@RequestBody List<String> dates) {
+		
+		Parametres param = pr.findById(0);
+		
+		param.setDatesEnvoi(dates);
+		
+		pr.save(param);
+		
+		return "succes";
+	}
 	
 	
 	
@@ -261,6 +316,28 @@ public class BulletinSoinController {
     }
     
     
+    
+    @GetMapping("/validationBulletin/{id}")
+    public String validationBulletin(@PathVariable Long id) {
+    	
+    	BulletinSoin bulletin = bsr.getById(id);
+    	
+    	bulletin.setEtat("Validé");
+    	bulletin.setDateValidation(new Date());
+    	
+    	bsr.save(bulletin);
+    	
+    	return "succés";
+    }
+    
+    
+    
+    @GetMapping("/byBordereauId/{id}")
+    public List<BulletinSoin> getBulletinByBordereauId(@PathVariable Long id) {
+    	
+    	return bsr.findByBordereauId(id);
+    	
+    }
     
     
 }
