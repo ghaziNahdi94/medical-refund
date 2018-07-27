@@ -384,5 +384,21 @@ public class BulletinSoinController {
     
     
     
+   @PutMapping("/refuser/{id}")
+   public String refuser(@RequestBody BulletinSoin bulletinSoin, @PathVariable Long id) {
+	   
+   	BulletinSoin bulletin = bsr.getById(id);
+	
+   	bulletin.setEtat("Refusé");
+   	bulletin.setDateValidation(new Date());
+	bulletin.setResultat(bulletinSoin.getResultat());
+
+	   bsr.save(bulletin);
+	   
+	   return "succés";
+   }
+    
+    
+    
     
 }

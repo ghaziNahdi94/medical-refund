@@ -126,7 +126,7 @@ public class VerifictionBordoreau {
 		List<BulletinSoin> bulletins = bsr.findAll();
 		
 		
-		List<BulletinSoin> enCours = bulletins.stream().filter(b -> b.getEtat().equals("En cours")).collect(Collectors.toList());
+		List<BulletinSoin> enCours = bulletins.stream().filter(b -> (b.getEtat().equals("En cours") && b.isActive())).collect(Collectors.toList());
 		
 		
 		for(BulletinSoin b : enCours) {
