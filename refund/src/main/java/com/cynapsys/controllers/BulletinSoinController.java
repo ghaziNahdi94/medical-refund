@@ -60,7 +60,7 @@ public class BulletinSoinController {
 
 	private final Logger logger = LoggerFactory.getLogger(BulletinSoinController.class) ;
 	
-	private final String UPLOADED_FOLDER_BULLETIN = "C:\\Users\\ghazi\\Desktop\\stage cynapsys\\bulletins\\";
+	private final String UPLOADED_FOLDER_BULLETIN = "C:\\Users\\ghazi\\Desktop\\stage cynapsys\\bulletins";
 	private final String UPLOADED_FOLDER_ARTICLES = UPLOADED_FOLDER_BULLETIN+"\\articles\\";
 
 

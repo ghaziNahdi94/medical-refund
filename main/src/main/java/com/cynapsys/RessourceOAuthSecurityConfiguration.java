@@ -32,6 +32,7 @@ public class RessourceOAuthSecurityConfiguration  extends  ResourceServerConfigu
 		
 		http.authorizeRequests().antMatchers("/bulletin/downloadBulletinFile/**").permitAll()
 		.antMatchers("/bulletin/downloadArticleFile/**").permitAll()
+		.antMatchers("/assure/downloadAffFile/**").permitAll()
 		.antMatchers("/assure/resetPassword/**").permitAll()
 		.and().authorizeRequests()
 				.anyRequest().authenticated();

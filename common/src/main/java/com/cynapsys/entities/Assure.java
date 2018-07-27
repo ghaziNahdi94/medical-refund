@@ -45,7 +45,7 @@ public class Assure extends AssuranceUser{
 
 
 
-	public Assure(Long cin, Date dateCin, Long numMatricule, String nom, Sexe sexe, String prenom, String adresse,
+	public Assure(Long cin, Date dateCin, Long numMatricule, String nom, String sexe, String prenom, String adresse,
 			String email, Date dateInscription, Date dateNaissance, String password, boolean active,
 			Situation situationFamiliale, String nomConjoint, Filiere filiereCnam, String numAffiliationCnam,
 			String urlFichierAffiliation, Date dateDerniereModif, float salaire, Poste poste, int nbrPersonneEnCharge,

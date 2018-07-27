@@ -28,7 +28,7 @@ public class AssuranceUser implements Serializable {
 	private Date dateCin;
 	private Long numMatricule;
 	private String nom;
-	private Sexe sexe;
+	private String sexe;
 	private String prenom;
 	private String adresse;
 	private String email;
@@ -42,7 +42,7 @@ public class AssuranceUser implements Serializable {
 
 
 
-	public AssuranceUser(Long cin, Date dateCin, Long numMatricule, String nom, Sexe sexe, String prenom,
+	public AssuranceUser(Long cin, Date dateCin, Long numMatricule, String nom, String sexe, String prenom,
 			String adresse, String email, Date dateInscription, Date dateNaissance, String password, boolean active) {
 		this.cin = cin;
 		this.dateCin = dateCin;
@@ -136,12 +136,12 @@ public class AssuranceUser implements Serializable {
 	}
 
 
-	public Sexe getSexe() {
+	public String getSexe() {
 		return sexe;
 	}
 
 
-	public void setSexe(Sexe sexe) {
+	public void setSexe(String sexe) {
 		this.sexe = sexe;
 	}
 
