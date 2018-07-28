@@ -282,7 +282,6 @@ public Assure getByEmail(@PathVariable String email, @PathVariable String passwo
 @PostMapping("/email")
 public String sendEmail(@RequestBody Email email) {
 	
-	
 	EmailSender.sendEmail(email.getObjet(), email.getMsg(), email.getFrom(), email.getTo());
 	
 	email.setDateReclamation(new Date());
